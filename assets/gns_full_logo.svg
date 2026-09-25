@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 80" fill="none">
+  <!-- Icon (scaled from 300x300 to 80x80) -->
+  <g transform="translate(0,0) scale(0.2667)">
+    <!-- Blue square -->
+    <rect x="57.5" y="57.5" width="185" height="185" fill="#3278cc"/>
+    <!-- Connecting lines -->
+    <rect x="50" y="50" width="200" height="200" fill="none" stroke="#c0c8d8" stroke-width="22"/>
+    <!-- Ring circles -->
+    <circle cx="50"  cy="50"  r="45" fill="#c0c8d8"/>
+    <circle cx="150" cy="50"  r="45" fill="#c0c8d8"/>
+    <circle cx="250" cy="50"  r="45" fill="#c0c8d8"/>
+    <circle cx="50"  cy="150" r="45" fill="#c0c8d8"/>
+    <circle cx="150" cy="150" r="45" fill="#c0c8d8"/>
+    <circle cx="250" cy="150" r="45" fill="#c0c8d8"/>
+    <circle cx="50"  cy="250" r="45" fill="#c0c8d8"/>
+    <circle cx="150" cy="250" r="45" fill="#c0c8d8"/>
+    <circle cx="250" cy="250" r="45" fill="#c0c8d8"/>
+    <!-- Colored circles -->
+    <circle cx="50"  cy="50"  r="23" fill="#000000"/>
+    <circle cx="150" cy="50"  r="23" fill="#c442cc"/>
+    <circle cx="250" cy="50"  r="23" fill="#000000"/>
+    <circle cx="50"  cy="150" r="23" fill="#c442cc"/>
+    <circle cx="150" cy="150" r="23" fill="#f59e0b"/>
+    <circle cx="250" cy="150" r="23" fill="#00a854"/>
+    <circle cx="50"  cy="250" r="23" fill="#000000"/>
+    <circle cx="150" cy="250" r="23" fill="#00a854"/>
+    <circle cx="250" cy="250" r="23" fill="#000000"/>
+  </g>
+  <!-- Wordmark -->
+  <text font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="600" font-size="72" letter-spacing="2" stroke="#c0c8d8" stroke-width="1" paint-order="stroke">
+    <tspan x="92" y="64" fill="#00a854">GN</tspan><tspan fill="#3278cc">Science</tspan>
+  </text>
+</svg>

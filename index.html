@@ -33,9 +33,9 @@ h1,h2,h3,h4{letter-spacing:-.02em}
 
 /* Header */
 .site-header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
-.nav{display:flex;align-items:center;gap:1rem;height:var(--header-h)}
-.brand{display:inline-flex;align-items:center;gap:.55rem;font-weight:800;font-size:1.12rem;color:var(--navy);text-decoration:none}
-.brand-mark{width:18px;height:18px;border-radius:5px;background:linear-gradient(135deg,var(--teal),var(--navy));box-shadow:0 0 0 3px var(--teal-soft)}
+.nav{display:flex;align-items:center;gap:.75rem;height:var(--header-h)}
+.brand{display:inline-flex;align-items:center;flex:0 0 auto;line-height:0;text-decoration:none}
+.brand img{height:28px;width:auto;max-width:none}
 .nav-links{display:flex;gap:.15rem;margin-left:auto;list-style:none;padding:0;margin-block:0}
 .nav-links a{display:block;white-space:nowrap;padding:.45rem .5rem;color:var(--slate);text-decoration:none;font-size:.86rem;font-weight:500;border-radius:6px}
 .nav-links a:hover,.nav-links a:focus-visible{color:var(--navy);background:var(--bg-alt)}
@@ -152,7 +152,7 @@ h1,h2,h3,h4{letter-spacing:-.02em}
 
 /* Footer */
 .footer{background:var(--navy);color:#94a3b8;padding:3rem 0 2.5rem}
-.footer .brand{color:#fff}
+.footer .brand{background:#fff;border-radius:8px;padding:6px 10px}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:2rem}
 .footer p{font-size:.9rem;margin:.7rem 0 0;max-width:34rem}
 .footer h4{color:#e2e8f0;font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;margin:0 0 .8rem}
@@ -286,7 +286,7 @@ h1,h2,h3,h4{letter-spacing:-.02em}
 .quote-inline .quote figcaption strong{color:var(--navy);font-size:.95rem}
 .quote-inline .quote-avatar{width:2.4rem;height:2.4rem;background:var(--teal-soft);border-color:var(--mint);color:var(--teal-dark)}
 /* Collapse the menu before it runs out of room */
-@media(max-width:1180px){
+@media(max-width:1240px){
   .menu-btn{display:block}
   .nav-links{display:none;position:absolute;top:var(--header-h);left:0;right:0;flex-direction:column;background:#fff;border-bottom:1px solid var(--border);padding:.75rem 1.25rem 1rem;box-shadow:var(--shadow);margin-left:0}
   .nav-links.open{display:flex}
@@ -310,7 +310,7 @@ h1,h2,h3,h4{letter-spacing:-.02em}
 
 <header class="site-header">
   <div class="wrap nav">
-    <a class="brand" href="#home"><span class="brand-mark" aria-hidden="true"></span>GNScience</a>
+    <a class="brand" href="#home"><img src="assets/gns_full_logo.svg" alt="GNScience" height="28" /></a>
     <button class="menu-btn" aria-expanded="false" aria-controls="nav-links" type="button">Menu</button>
     <nav class="nav-links" id="nav-links" aria-label="Primary">
       <a href="#home">Home</a>
@@ -651,7 +651,7 @@ h1,h2,h3,h4{letter-spacing:-.02em}
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <a class="brand" href="#home"><span class="brand-mark" aria-hidden="true"></span>GNScience</a>
+        <a class="brand" href="#home"><img src="assets/gns_full_logo.svg" alt="GNScience" height="28" /></a>
         <p>Revenue intelligence for specialty healthcare. Find leakage, prevent avoidable denials, and recover the revenue you have already earned.</p>
         <div class="footer-investor"><a href="#contact" data-interest="investor">Investor inquiries</a></div>
       </div>
