@@ -1,353 +1,782 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Clinic OS, the operating system for the clinic: a knowledge kernel that cites every rule, an operational record of your own, and specialty packs designed for the way your clinic delivers care." />
-  <title>Clinic OS — Operating System for Clinical Operations</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="GNScience helps specialty healthcare organizations get paid for the care they already deliver: find revenue leakage, prevent avoidable denials, and recover earned revenue, with cited AI and human oversight." />
+<title>GNScience | Stop Denials Before the Claim</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --navy:#0f172a; --navy-soft:#1e293b; --slate:#334155; --muted:#526a7f;
+  --border:#e2e8f0; --border-strong:#cbd5e1; --bg:#ffffff; --bg-alt:#f6f9fb;
+  --teal:#0d9488; --teal-dark:#0f766e; --teal-soft:#ccfbf1; --mint:#aee2de;
+  --radius:14px; --radius-sm:9px;
+  --shadow:0 1px 2px rgba(15,23,42,.06),0 8px 24px rgba(15,23,42,.06);
+  --shadow-lg:0 4px 6px rgba(15,23,42,.04),0 24px 48px rgba(15,23,42,.10);
+  --font:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --max:1140px; --header-h:70px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + 12px)}
+body{margin:0;font-family:var(--font);font-size:16px;line-height:1.6;color:var(--navy);background:var(--bg);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:var(--teal-dark);text-underline-offset:3px}
+a:hover{color:var(--teal)}
+h1,h2,h3,h4{letter-spacing:-.02em}
+.wrap{width:min(100% - 2.5rem,var(--max));margin-inline:auto}
+.skip{position:absolute;left:-999px;top:0;background:var(--navy);color:#fff;padding:.75rem 1rem;z-index:1000}
+.skip:focus{left:.5rem;top:.5rem}
+
+/* Header */
+.site-header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.nav{display:flex;align-items:center;gap:1rem;height:var(--header-h)}
+.brand{display:inline-flex;align-items:center;gap:.55rem;font-weight:800;font-size:1.12rem;color:var(--navy);text-decoration:none}
+.brand-mark{width:18px;height:18px;border-radius:5px;background:linear-gradient(135deg,var(--teal),var(--navy));box-shadow:0 0 0 3px var(--teal-soft)}
+.nav-links{display:flex;gap:.15rem;margin-left:auto;list-style:none;padding:0;margin-block:0}
+.nav-links a{display:block;white-space:nowrap;padding:.45rem .5rem;color:var(--slate);text-decoration:none;font-size:.86rem;font-weight:500;border-radius:6px}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--navy);background:var(--bg-alt)}
+.menu-btn{display:none;margin-left:auto;border:1px solid var(--border);border-radius:8px;background:#fff;padding:.5rem .8rem;font:inherit;font-size:.85rem;font-weight:600;cursor:pointer}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:.75rem 1.25rem;font-family:inherit;font-size:.95rem;font-weight:600;line-height:1.2;border-radius:var(--radius-sm);border:1px solid transparent;cursor:pointer;text-decoration:none;transition:background .15s,border-color .15s,color .15s,box-shadow .15s}
+.btn.sm{padding:.5rem .9rem;font-size:.85rem}
+.btn.primary{background:var(--teal);color:#fff;border-color:var(--teal)}
+.btn.primary:hover{background:var(--teal-dark);border-color:var(--teal-dark);color:#fff}
+.btn.secondary{background:#fff;color:var(--navy);border-color:var(--border-strong)}
+.btn.secondary:hover{border-color:var(--slate);background:var(--bg-alt);color:var(--navy)}
+.nav-cta{margin-left:.25rem;white-space:nowrap;flex:0 0 auto}
+
+/* Hero */
+.hero{padding:4.25rem 0 4rem;background:radial-gradient(ellipse 70% 60% at 80% -10%,rgba(13,148,136,.10),transparent 60%),linear-gradient(180deg,var(--bg-alt),var(--bg) 90%);border-bottom:1px solid var(--border)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:3rem;align-items:center}
+.kicker{font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--teal-dark);margin-bottom:.9rem}
+.hero h1{font-family:var(--serif);font-size:clamp(2rem,3.6vw,2.9rem);font-weight:700;line-height:1.15;margin:0 0 1.1rem}
+.lead{font-size:1.12rem;color:var(--slate);margin:0 0 1.6rem;max-width:36rem}
+.hero-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:1.4rem}
+.proofline{display:flex;flex-wrap:wrap;gap:.35rem 1.25rem;font-size:.85rem;color:var(--muted);font-weight:500}
+.proofline span{display:inline-flex;align-items:center;gap:.45rem}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 3px var(--teal-soft)}
+
+/* Dashboard mock */
+.dashboard{background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-lg);overflow:hidden}
+.dashboard-top{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.1rem;background:var(--navy);color:#fff}
+.dashboard-title{font-size:.9rem;font-weight:600}
+.status{font-size:.68rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--mint);background:rgba(174,226,222,.15);padding:.2rem .55rem;border-radius:999px}
+.metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;padding:1.1rem}
+.metric{background:var(--bg-alt);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.85rem}
+.metric small{display:block;font-size:.68rem;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:var(--muted)}
+.metric strong{display:block;font-size:1.7rem;font-weight:800;color:var(--navy);font-variant-numeric:tabular-nums;line-height:1.1;margin:.2rem 0}
+.metric em{font-style:normal;font-size:.72rem;font-weight:600;color:var(--teal-dark)}
+.worklist{padding:0 1.1rem 1.2rem}
+.worklist .row{display:grid;grid-template-columns:1.5fr .7fr .7fr;gap:.5rem;align-items:center;padding:.6rem .2rem;border-bottom:1px solid var(--border);font-size:.82rem;color:var(--slate)}
+.worklist .row:first-child{font-size:.66rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border-strong)}
+.worklist .row:last-child{border-bottom:0}
+.pill{justify-self:start;font-size:.68rem;font-weight:600;padding:.18rem .55rem;border-radius:999px;background:var(--bg-alt);border:1px solid var(--border);color:var(--slate)}
+.pill.good{background:var(--teal-soft);border-color:transparent;color:var(--teal-dark)}
+
+/* Sections */
+.section{padding:4.5rem 0}
+.section.alt{background:var(--bg-alt);border-block:1px solid var(--border)}
+.section-head{max-width:720px;margin:0 0 2.5rem}
+.section-head.center{margin-inline:auto;text-align:center}
+.eyebrow{font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--teal-dark);margin:0 0 .6rem}
+.section-head h2{font-family:var(--serif);font-size:clamp(1.5rem,2.6vw,2.05rem);font-weight:700;line-height:1.2;margin:0 0 .75rem}
+.section-head p{margin:0;color:var(--slate);font-size:1.05rem}
+.section-head .eyebrow{color:var(--teal-dark);font-size:.8rem;margin:0 0 .6rem}
+
+/* Problem grid */
+.problem-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
+.problem{background:#fff;border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow)}
+.problem h3{font-family:var(--serif);font-size:1.12rem;margin:0 0 .5rem;line-height:1.3}
+.problem p{margin:0;color:var(--slate);font-size:.95rem}
+
+/* Cards */
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
+.cards.three{grid-template-columns:repeat(3,1fr)}
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem 1.4rem;box-shadow:var(--shadow);transition:border-color .15s,box-shadow .15s}
+.card:hover{border-color:var(--border-strong);box-shadow:var(--shadow-lg)}
+.num{font-size:.72rem;font-weight:700;letter-spacing:.06em;color:var(--teal);margin-bottom:.7rem}
+.card h3{font-size:1.1rem;margin:0 0 .55rem}
+.card p{margin:0;color:var(--slate);font-size:.94rem}
+.specialty-card{display:flex;flex-direction:column;gap:1rem}
+.specialty-meta{margin-top:auto;font-size:.82rem;color:var(--muted);border-top:1px solid var(--border);padding-top:.8rem}
+
+
+/* Architecture */
+.architecture{display:grid;grid-template-columns:1.05fr .95fr;gap:3rem;align-items:center}
+.list-clean{list-style:none;margin:1.25rem 0;padding:0}
+.list-clean li{position:relative;padding-left:1.4rem;margin-bottom:.8rem;color:var(--slate);font-size:.98rem}
+.list-clean li::before{content:"";position:absolute;left:0;top:.55em;width:8px;height:8px;border-radius:50%;background:var(--teal)}
+.list-clean strong{color:var(--navy)}
+.stack{background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-lg);padding:1.6rem}
+.systems{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem}
+.system{background:var(--bg-alt);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.7rem;text-align:center;font-size:.85rem;font-weight:600;color:var(--slate)}
+.core{margin:.9rem 0;background:var(--navy);color:#fff;border-radius:var(--radius-sm);padding:1.1rem;text-align:center;display:flex;flex-direction:column;gap:.25rem;box-shadow:var(--shadow)}
+.core strong{font-size:1.05rem}
+.core small{font-size:.76rem;color:#94a3b8}
+.agent-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.agent{background:var(--teal-soft);color:var(--teal-dark);border-radius:var(--radius-sm);padding:.6rem;text-align:center;font-size:.82rem;font-weight:700}
+
+/* Bands */
+.band{display:grid;grid-template-columns:1.5fr auto;gap:2rem;align-items:center;background:radial-gradient(ellipse 70% 120% at 100% 0%,rgba(13,148,136,.28),transparent 60%),var(--navy);color:#fff;border-radius:var(--radius);padding:2.4rem 2.2rem}
+.band h2{font-family:var(--serif);font-size:clamp(1.4rem,2.4vw,1.9rem);font-weight:700;margin:.4rem 0 .7rem;line-height:1.25}
+.band p{margin:0;color:#cbd5e1;max-width:620px}
+.band .eyebrow{color:var(--mint)}
+
+/* Trust */
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.trust{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.3rem}
+.trust h3{font-size:.98rem;margin:0 0 .4rem}
+.trust p{margin:0;font-size:.88rem;color:var(--slate)}
+
+/* Founders */
+.founders-wrap{margin-top:2.5rem}
+.founders-title{font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--teal-dark);margin:0 0 1.25rem}
+.founder-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
+.founder{display:flex;gap:1.1rem;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow)}
+.founder-avatar{flex:0 0 auto;width:3.2rem;height:3.2rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.05rem;color:#fff;background:linear-gradient(135deg,var(--teal),var(--navy));box-shadow:0 0 0 4px var(--teal-soft)}
+.founder h4{margin:0 0 .15rem;font-size:1.12rem}
+.founder-role{margin:0 0 .55rem;font-size:.82rem;font-weight:600;letter-spacing:.02em;color:var(--teal-dark)}
+.founder p:last-child{margin:0;font-size:.94rem;color:var(--slate)}
+
+/* Contact */
+.contact-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:3rem;align-items:start}
+.contact-direct{font-size:1.05rem;margin:.4rem 0 0}
+.contact-form{display:flex;flex-direction:column;gap:.9rem;padding:1.6rem;background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
+.contact-form label{display:flex;flex-direction:column;gap:.35rem;font-size:.85rem;font-weight:600;color:var(--navy)}
+.contact-form input,.contact-form select,.contact-form textarea{font-family:inherit;font-size:.95rem;font-weight:400;padding:.65rem .75rem;border:1px solid var(--border-strong);border-radius:var(--radius-sm);background:#fff;color:var(--navy)}
+.contact-form input:focus,.contact-form select:focus,.contact-form textarea:focus{outline:2px solid rgba(13,148,136,.35);outline-offset:1px;border-color:var(--teal)}
+.contact-form .btn{align-self:flex-start}
+
+/* Footer */
+.footer{background:var(--navy);color:#94a3b8;padding:3rem 0 2.5rem}
+.footer .brand{color:#fff}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:2rem}
+.footer p{font-size:.9rem;margin:.7rem 0 0;max-width:34rem}
+.footer h4{color:#e2e8f0;font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;margin:0 0 .8rem}
+.footer-grid a{display:block;color:#cbd5e1;text-decoration:none;font-size:.9rem;font-weight:500;margin-bottom:.5rem}
+.footer-grid a:hover{color:#fff}
+.footer-investor{margin-top:1rem}
+.footer-investor a{color:var(--mint);font-weight:600;font-size:.9rem}
+.legal{display:flex;flex-wrap:wrap;gap:.6rem 2rem;justify-content:space-between;margin-top:2.2rem;padding-top:1.4rem;border-top:1px solid var(--navy-soft);font-size:.78rem;color:#64748b}
+
+/* Advisor quote (dark) */
+.quote-section{padding:5rem 0;background:radial-gradient(ellipse 60% 90% at 100% 0%,rgba(13,148,136,.22),transparent 60%),var(--navy);color:#fff}
+.quote{max-width:880px;margin:0;text-align:left}
+.quote .mark{font-family:var(--serif);font-size:5rem;line-height:.7;color:var(--mint);display:block;height:auto;margin-bottom:1.1rem}
+.quote blockquote{margin:0;font-family:var(--font);font-size:clamp(1.35rem,2.5vw,1.95rem);font-weight:700;line-height:1.35;letter-spacing:-.015em;color:#fff}
+.quote figcaption{margin-top:2rem;font-size:.95rem;color:#94a3b8;display:flex;align-items:center;gap:1rem}
+.quote figcaption strong{display:block;color:#fff;font-size:1.02rem}
+.quote-avatar{flex:0 0 auto;width:3rem;height:3rem;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(174,226,222,.14);border:1px solid rgba(174,226,222,.35);color:var(--mint)}
+
+/* Flowing architecture diagram */
+.flow{background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-lg);padding:1.25rem}
+.flow svg{display:block;width:100%;height:auto}
+.flow .wire{fill:none;stroke:var(--border-strong);stroke-width:2}
+.flow .pulse{fill:none;stroke:var(--teal);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:6 18;animation:flowdash 1.6s linear infinite}
+.flow .loop{fill:none;stroke:var(--teal);stroke-width:1.75;stroke-dasharray:4 6;opacity:.7}
+@keyframes flowdash{to{stroke-dashoffset:-24}}
+@media (prefers-reduced-motion:reduce){.flow .pulse{animation:none}}
+
+/* Design partner steps */
+.partner-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start}
+.partner-grid h2{font-family:var(--serif);font-size:clamp(1.6rem,2.8vw,2.3rem);font-weight:700;line-height:1.2;margin:0 0 .9rem}
+.partner-intro{color:var(--slate);font-size:1.05rem;margin:0 0 2rem}
+.partner-head{grid-column:1 / -1;margin-bottom:-2.6rem}
+@media(max-width:940px){.partner-head{margin-bottom:-1.35rem}}
+.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding:0 0 1.6rem 3rem}
+.steps li::before{content:counter(s);position:absolute;left:0;top:.05rem;width:2rem;height:2rem;border-radius:50%;background:var(--navy);color:#fff;font-weight:700;font-size:.9rem;display:flex;align-items:center;justify-content:center}
+.steps li::after{content:"";position:absolute;left:calc(1rem - 1px);top:2.3rem;bottom:.3rem;width:2px;background:var(--border-strong)}
+.steps li:last-child{padding-bottom:0}
+.steps li:last-child::after{display:none}
+.steps h3{font-size:1.08rem;margin:0 0 .3rem}
+.steps p{margin:0;color:var(--slate);font-size:.96rem}
+.gets{background:radial-gradient(ellipse 70% 80% at 100% 0%,rgba(13,148,136,.25),transparent 60%),var(--navy);color:#fff;border-radius:var(--radius);padding:2.2rem;box-shadow:var(--shadow-lg)}
+.gets h3{font-size:1.12rem;margin:0 0 .8rem;color:#fff}
+.gets ul{margin:0 0 1.8rem;padding-left:1.15rem;color:#cbd5e1}
+.gets li{margin-bottom:.55rem}
+.gets .btn{background:#fff;color:var(--navy);border-color:#fff}
+.gets .btn:hover{background:var(--teal-soft);color:var(--navy)}
+
+/* Company */
+.company-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:3.5rem;align-items:start}
+.company-grid h2{font-family:var(--serif);font-size:clamp(1.6rem,2.8vw,2.3rem);font-weight:700;line-height:1.2;margin:0 0 1rem}
+.company-intro{color:var(--slate);font-size:1.06rem;margin:0 0 2rem}
+.founder-list{display:grid;gap:1.4rem}
+.founder-row{display:flex;gap:1rem;align-items:flex-start}
+.founder-row h4{margin:0;font-size:1.05rem}
+.founder-row .founder-role{margin:.05rem 0 .35rem}
+.founder-row p:not(.founder-role){margin:0 0 .7rem;color:var(--slate);font-size:.94rem}
+.founder-row p:last-child{margin-bottom:0}
+.side-blocks{display:grid;gap:1.25rem;position:sticky;top:calc(var(--header-h) + 1.5rem)}
+@media(max-width:940px){.side-blocks{position:static}}
+.info-block{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.6rem;box-shadow:var(--shadow)}
+.info-block h3{font-size:1.12rem;margin:0 0 .5rem}
+.info-block p{margin:0;color:var(--slate);font-size:.96rem}
+.info-block ul{margin:.9rem 0 0;padding-left:1.15rem;color:var(--slate);font-size:.96rem}
+.info-block li{margin-bottom:.3rem}
+.info-block .more{display:inline-block;margin-top:1.1rem;font-weight:600}
+@media(max-width:940px){.partner-grid,.company-grid{grid-template-columns:1fr;gap:2.25rem}}
+
+/* Find-Prevent-Recover-Learn cycle */
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.cycle{position:relative}
+.cycle-cards .card{position:relative}
+.cycle-cards .card:not(:last-child)::after{content:"";position:absolute;z-index:2;top:50%;right:calc(-.625rem - 13px);width:26px;height:26px;margin-top:-13px;border-radius:50%;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230d9488' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 6l6 6-6 6'/%3E%3C/svg%3E") center/13px no-repeat;border:1px solid var(--border-strong);box-shadow:var(--shadow)}
+.loop-track{position:relative;height:76px}
+.loop-path{position:absolute;top:0;left:calc((100% - 3.75rem) / 8);right:calc((100% - 3.75rem) / 8);height:46px;border:2.5px solid var(--teal);border-top:0;border-radius:0 0 18px 18px}
+.loop-arrow{position:absolute;left:-9.25px;top:-4px;width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:12px solid var(--teal)}
+.loop-start{position:absolute;right:-7.25px;top:-2px;width:12px;height:12px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px var(--teal-soft)}
+.loop-pill{position:absolute;left:50%;top:46px;transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:.5rem;white-space:nowrap;background:#fff;border:1px solid var(--border);border-radius:999px;padding:.5rem 1rem;font-size:.88rem;font-weight:500;color:var(--slate);box-shadow:var(--shadow)}
+.loop-pill svg{color:var(--teal)}
+@media(max-width:940px){
+  .cycle-cards .card::after{display:none}
+  .loop-track{height:auto;margin-top:1.25rem;text-align:center}
+  .loop-path{display:none}
+  .loop-pill{position:static;transform:none}
+}
+
+/* Responsive */
+@media(max-width:940px){
+  .hero-grid,.architecture,.contact-layout{grid-template-columns:1fr;gap:2rem}
+  .cards,.trust-grid{grid-template-columns:1fr 1fr}
+  .problem-grid{grid-template-columns:1fr}
+  .band{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .nav-cta{display:none}
+  .cards,.cards.three,.trust-grid,.metric-grid,.systems,.agent-row,.footer-grid,.founder-grid{grid-template-columns:1fr}
+  .worklist .row{grid-template-columns:1.4fr .8fr}
+  .worklist .row span:nth-child(2){display:none}
+  .section{padding:3.25rem 0}
+  .hero{padding:3rem 0 2.75rem}
+}
+
+/* Company page: founders side by side now that the side column is gone */
+.company-grid{grid-template-columns:1fr}
+.company-grid .company-intro{max-width:46rem}
+.founder-list{grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:.5rem;align-items:stretch}
+.founder-row{display:grid;grid-template-columns:auto 1fr;column-gap:1rem;align-content:start;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.6rem;box-shadow:var(--shadow)}
+.founder-row > div:not(.founder-avatar){display:contents}
+.founder-row .founder-avatar{grid-row:1 / span 2;align-self:center}
+.founder-row h4{grid-column:2;align-self:end}
+.founder-row .founder-role{grid-column:2;margin:.1rem 0 0}
+.founder-row p:not(.founder-role){grid-column:1 / -1}
+.founder-row .founder-role + p{margin-top:1.1rem;padding-top:1.1rem;border-top:1px solid var(--border)}
+@media(max-width:640px){.founder-list{grid-template-columns:1fr}}
+/* Careers */
+.investor-wrap{margin-top:2.5rem;max-width:40rem}
+.role-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.role{display:flex;flex-direction:column;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem 1.4rem;box-shadow:var(--shadow)}
+.role-tag{align-self:flex-start;font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--teal-dark);background:var(--teal-soft);padding:.2rem .55rem;border-radius:999px;margin-bottom:.8rem}
+.role h3{font-size:1.08rem;line-height:1.3;margin:0 0 .5rem}
+.role p{margin:0 0 1.1rem;color:var(--slate);font-size:.95rem}
+.role .more{margin-top:auto;font-weight:600}
+@media(max-width:940px){.role-grid{grid-template-columns:1fr}}
+/* Advisor quote, inline card on the Specialties page */
+.quote-inline{margin-top:2.5rem}
+.quote-inline .quote{max-width:none;background:#fff;border:1px solid var(--border);border-left:4px solid var(--teal);border-radius:var(--radius);padding:1.6rem 1.75rem;box-shadow:var(--shadow)}
+.quote-inline .quote .mark{font-size:2.6rem;line-height:.6;margin-bottom:.4rem;color:var(--teal)}
+.quote-inline .quote blockquote{font-size:1.05rem;font-weight:500;line-height:1.6;letter-spacing:0;color:var(--navy)}
+.quote-inline .quote figcaption{margin-top:1.1rem;font-size:.88rem;color:var(--muted);gap:.75rem}
+.quote-inline .quote figcaption strong{color:var(--navy);font-size:.95rem}
+.quote-inline .quote-avatar{width:2.4rem;height:2.4rem;background:var(--teal-soft);border-color:var(--mint);color:var(--teal-dark)}
+/* Collapse the menu before it runs out of room */
+@media(max-width:1180px){
+  .menu-btn{display:block}
+  .nav-links{display:none;position:absolute;top:var(--header-h);left:0;right:0;flex-direction:column;background:#fff;border-bottom:1px solid var(--border);padding:.75rem 1.25rem 1rem;box-shadow:var(--shadow);margin-left:0}
+  .nav-links.open{display:flex}
+}
+/* Multi-page view */
+.js-pages [data-page].page-off{display:none!important}
+.nav-links a[aria-current="page"]{color:var(--navy);background:var(--bg-alt);font-weight:600}
+.pager-wrap{padding:0 0 3.5rem}
+.pager-wrap.on-alt{background:var(--bg-alt);border-bottom:1px solid var(--border)}
+.pager-wrap.on-alt + *, .section.alt:has(+ .pager-wrap.on-alt){border-bottom:0}
+.pager{display:flex;justify-content:space-between;gap:1rem;border-top:1px solid var(--border);padding-top:1.5rem}
+.pager a{display:flex;flex-direction:column;gap:.1rem;text-decoration:none;color:var(--navy);font-weight:700;padding:.75rem 1rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:#fff;min-width:11rem;transition:border-color .15s,box-shadow .15s}
+.pager a:hover{border-color:var(--teal);box-shadow:var(--shadow);color:var(--navy)}
+.pager a small{font-size:.75rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--teal-dark)}
+.pager .next{margin-left:auto;text-align:right}
+@media(max-width:640px){.pager a{min-width:0;flex:1}}
+</style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+<a class="skip" href="#main">Skip to content</a>
 
-  <header class="site-header" id="top">
-    <nav class="nav" aria-label="Primary">
-      <a class="nav-brand" href="#top">Clinic OS</a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="nav-links" id="nav-menu">
-        <li><a href="#product">Product</a></li>
-        <li><a href="#packs">Packs</a></li>
-        <li><a href="#demo">Demo</a></li>
-        <li><a href="#shadow">Shadow</a></li>
-        <li><a href="company.html">Company</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <a class="btn btn-sm btn-primary nav-cta" href="#shadow">Start shadow after BAA</a>
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="#home"><span class="brand-mark" aria-hidden="true"></span>GNScience</a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav-links" type="button">Menu</button>
+    <nav class="nav-links" id="nav-links" aria-label="Primary">
+      <a href="#home">Home</a>
+      <a href="#solutions">Solutions</a>
+      <a href="#platform">Platform</a>
+      <a href="#specialties">Specialties</a>
+      <a href="#partners">Design Partners</a>
+      <a href="#trust">Security &amp; Trust</a>
+      <a href="#company">Company</a>
+      <a href="#careers">Careers</a>
+      <a href="#contact">Contact</a>
     </nav>
-  </header>
+    <a class="btn sm primary nav-cta" href="#contact" data-interest="demo">Request a demo</a>
+  </div>
+</header>
 
-  <main id="main">
-    <!-- 2. Hero -->
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="container hero-inner">
-        <p class="eyebrow">The operating system for the clinic</p>
-        <h1 id="hero-title">Built on a knowledge kernel that cites every rule, an operational record of your own, and specialty packs designed for the way your clinic delivers care.</h1>
-        <p class="hero-sub">Clinic OS works alongside your EMR, clearinghouse, and EVV, and your team approves every step.</p>
+<main id="main">
+  <span id="top"></span>
+  <!-- Hero -->
+  <section class="hero" id="home" data-page="home">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="kicker">Revenue intelligence for specialty healthcare</div>
+        <h1>Stop denials before the claim and get paid for the care you already deliver.</h1>
+        <p class="lead">GNScience finds revenue leakage, prevents avoidable denials, and automates the work needed to recover revenue you have already earned. All without forcing you to replace the systems your organization already runs.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#shadow">Start shadow after BAA</a>
-          <a class="btn btn-secondary" href="#demo">See the unit ledger demo</a>
+          <a class="btn primary" href="#partners">Explore a design partnership</a>
+          <a class="btn secondary" href="#solutions">See how it works</a>
         </div>
-        <p class="hero-secondary-link"><a href="mailto:tech@platypustechdesign.com?subject=Clinic%20OS%20design%20partner">Or request a design-partner conversation</a></p>
-      </div>
-    </section>
-
-    <!-- 3. What it is -->
-    <section class="section" id="product" aria-labelledby="product-title">
-      <div class="container">
-        <header class="section-head">
-          <p class="eyebrow">What it is</p>
-          <h2 id="product-title">Three pillars over one OS</h2>
-          <p class="section-lead">Clinic OS is not a bolt-on widget. It is the operating layer: ontology-network kernel, operational system of record, and packs that specialize without rewriting the core.</p>
-        </header>
-        <div class="pillars">
-          <article class="pillar-card">
-            <div class="pillar-num" aria-hidden="true">01</div>
-            <h3>Ontology-network kernel</h3>
-            <p>A cited knowledge kernel — terms, rules, and evidence paths that agents and humans can inspect. Recommendations carry citations; nothing is a black box.</p>
-          </article>
-          <article class="pillar-card">
-            <div class="pillar-num" aria-hidden="true">02</div>
-            <h3>Operational system of record</h3>
-            <p>The record we own: auth, session, credential, visit, and claim-ready state. EMR and clearinghouse remain peripherals. Clinic OS is the SoR for operations.</p>
-          </article>
-          <article class="pillar-card">
-            <div class="pillar-num" aria-hidden="true">03</div>
-            <h3>Specialty + capability packs</h3>
-            <p>ABA, home health, pediatrics — and capability packs for revenue integrity and ops intelligence — layered on the same OS. Sequencing is strategy; the architecture is shared.</p>
-          </article>
-        </div>
-        <aside class="hitl-banner">
-          <div>
-            <h3>Shadow path · agents propose / humans dispose</h3>
-            <p>Observe → recommend → act. Agents propose; humans dispose. Human-in-the-loop is the default control plane — not a footnote.</p>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <!-- 4. Anti-position -->
-    <section class="anti-strip" aria-labelledby="anti-title">
-      <div class="container anti-inner">
-        <h2 id="anti-title" class="anti-heading">What Clinic OS is</h2>
-        <p class="anti-are">Clinic OS is the operating layer for clinical operations: ontology-network kernel, operational system of record, and specialty packs — agents propose, humans dispose.</p>
-        <ul class="anti-list" aria-label="What Clinic OS is not">
-          <li>Not an EMR replacement</li>
-          <li>Not a digital twin</li>
-          <li>Not a recoding company</li>
-          <li>Not a clearinghouse / autonomous RCM platform</li>
-          <li>Not an EVV aggregator</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- 5. Specialty packs -->
-    <section class="section section-alt" id="packs" aria-labelledby="specialty-title">
-      <div class="container">
-        <header class="section-head">
-          <p class="eyebrow">Specialty packs</p>
-          <h2 id="specialty-title">First-wedge candidates — sequencing, not architecture</h2>
-          <p class="section-lead">Home health, pediatrics, and ABA are viable first wedges. The OS stays constant; packs specialize the surface.</p>
-        </header>
-        <div class="pack-grid specialty-grid">
-          <article class="pack-card pack-hero">
-            <div class="pack-tags">
-              <span class="tag tag-accent">Hero demo</span>
-              <span class="tag">Specialty pack</span>
-            </div>
-            <h3>ABA</h3>
-            <p>Unit ledger, authorization gates, and claim-ready session state for applied behavior analysis operations — the path we demo first.</p>
-          </article>
-          <article class="pack-card">
-            <div class="pack-tags">
-              <span class="tag">Specialty pack</span>
-            </div>
-            <h3>Home health</h3>
-            <p>Visit integrity, credential and EVV adjacency, and operational gates suited to agency workflows — without replacing the agency EHR.</p>
-          </article>
-          <article class="pack-card">
-            <div class="pack-tags">
-              <span class="tag">Specialty pack</span>
-            </div>
-            <h3>Pediatrics</h3>
-            <p>Ops integrity and shared substrate for pediatric clinical operations — not clinical EHR features. The pack also strengthens shared substrate (identity and eligibility) that ABA rides on; it does not become the chart.</p>
-          </article>
+        <div class="proofline">
+          <span><i class="dot" aria-hidden="true"></i>Cited recommendations</span>
+          <span><i class="dot" aria-hidden="true"></i>Human oversight</span>
+          <span><i class="dot" aria-hidden="true"></i>Synthetic public demos</span>
         </div>
       </div>
-    </section>
-
-    <!-- 6. Capability packs -->
-    <section class="section" aria-labelledby="capability-title">
-      <div class="container">
-        <header class="section-head section-head-compact">
-          <p class="eyebrow">Capability packs</p>
-          <h2 id="capability-title">Revenue integrity · Ops intelligence</h2>
-          <p class="section-lead">Capability packs sit on the OS. They are not the product noun — Clinic OS is.</p>
-        </header>
-        <div class="pack-grid capability-grid">
-          <article class="pack-card pack-compact">
-            <h3>Revenue integrity</h3>
-            <p>Gate denials before the session. Align authorization, unit ledger, and claim-ready state so revenue leakage is caught at the operational edge.</p>
-          </article>
-          <article class="pack-card pack-compact">
-            <h3>Ops intelligence</h3>
-            <p>Cited recommendations over the operational record. Surface what to act on — with humans disposing on every material step.</p>
-          </article>
+      <div class="dashboard" aria-label="Illustrative GNScience revenue opportunity dashboard">
+        <div class="dashboard-top">
+          <span class="dashboard-title">Revenue Opportunity View</span>
+          <span class="status">Synthetic demo</span>
+        </div>
+        <div class="metric-grid">
+          <div class="metric"><small>Claims at risk</small><strong>42</strong><em>Prioritized</em></div>
+          <div class="metric"><small>Recoverable work</small><strong>18</strong><em>Action ready</em></div>
+          <div class="metric"><small>Pre-submit flags</small><strong>27</strong><em>Prevent first</em></div>
+        </div>
+        <div class="worklist">
+          <div class="row"><span>Opportunity</span><span>Stage</span><span>Status</span></div>
+          <div class="row"><span>Authorization-unit mismatch</span><span>Pre-visit</span><span class="pill good">Review</span></div>
+          <div class="row"><span>Documentation / code gap</span><span>Pre-claim</span><span class="pill">High value</span></div>
+          <div class="row"><span>Denied claim with evidence path</span><span>Recovery</span><span class="pill good">Action</span></div>
         </div>
       </div>
-    </section>
-
-    <!-- 7. Stack diagram -->
-    <section class="section section-alt" id="stack" aria-labelledby="stack-title">
-      <div class="container">
-        <header class="section-head">
-          <p class="eyebrow">Architecture</p>
-          <h2 id="stack-title">Clinic OS at the center · EMR peripheral</h2>
-          <p class="section-lead">Auth · session · credential · visit · claim-ready. Surrounding systems plug in; they are not the operating system.</p>
-        </header>
-        <div class="stack-diagram" role="img" aria-label="Clinic OS at center with ABA clinical PM, Agency EHR, Clearinghouse, and EVV aggregator as peripherals">
-          <div class="stack-peripherals stack-top">
-            <div class="stack-box peripheral">ABA clinical PM</div>
-            <div class="stack-box peripheral">Agency EHR</div>
-          </div>
-          <div class="stack-center-wrap">
-            <div class="stack-connector stack-connector-v" aria-hidden="true"></div>
-            <div class="stack-box core">
-              <span class="core-label">Clinic OS</span>
-              <span class="core-meta">auth · session · credential · visit · claim-ready</span>
-              <span class="core-badge">EMR peripheral</span>
-            </div>
-            <div class="stack-connector stack-connector-v" aria-hidden="true"></div>
-          </div>
-          <div class="stack-peripherals stack-bottom">
-            <div class="stack-box peripheral">Clearinghouse</div>
-            <div class="stack-box peripheral">EVV aggregator</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 8. Demo -->
-    <section class="section demo-section" id="demo" aria-labelledby="demo-title">
-      <div class="container">
-        <div class="demo-panel">
-          <header class="section-head section-head-left">
-            <p class="eyebrow">Demo</p>
-            <h2 id="demo-title">Unit Ledger Gate: Stop the Denial Before the Session</h2>
-            <p class="section-lead">A walkthrough of the operational gate with production-shaped controls.</p>
-          </header>
-          <ul class="demo-bullets">
-            <li>Live unit ledger: <strong>Approved</strong> · <strong>Billed</strong> · <strong>In-progress</strong> · <strong>Remaining</strong></li>
-            <li>Schedule and claim gate before the session starts</li>
-            <li>HITL propose path — agents propose / humans dispose</li>
-            <li>Cited recommendations from the ontology-network kernel</li>
-          </ul>
-          <div class="demo-actions">
-            <a class="btn btn-primary" href="mailto:tech@platypustechdesign.com?subject=Clinic%20OS%20unit%20ledger%20demo">Request the unit ledger demo</a>
-            <p class="demo-note demo-path-note">Partner preview: interactive Unit Ledger Gate lives at <code>platform/console/aba-unit-ledger-demo.html</code> in the Clinic OS console (ask Simmy / Brand for a walkthrough). Story VO is rail-aligned and partner-ready.</p>
-          </div>
-          <div class="ledger-preview" aria-label="Synthetic unit ledger object preview">
-            <p class="ledger-caption">Authorization unit ledger · synthetic chrome</p>
-            <div class="ledger-object">
-              <div class="ledger-cell">
-                <span class="ledger-label">Approved</span>
-                <span class="ledger-val">120</span>
-              </div>
-              <div class="ledger-cell">
-                <span class="ledger-label">Billed</span>
-                <span class="ledger-val">48</span>
-              </div>
-              <div class="ledger-cell">
-                <span class="ledger-label">In-progress</span>
-                <span class="ledger-val">12</span>
-              </div>
-              <div class="ledger-cell">
-                <span class="ledger-label">Remaining</span>
-                <span class="ledger-val">60</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 9. Shadow / design-partner -->
-    <section class="section" id="shadow" aria-labelledby="shadow-title">
-      <div class="container">
-        <header class="section-head">
-          <p class="eyebrow">Shadow · design partner</p>
-          <h2 id="shadow-title">Prove the gate on your book</h2>
-          <p class="section-lead">Not rip-and-replace. After a BAA, we run a free 18–24 month claims + payments review on your extract — observe, recommend, then decide whether to act.</p>
-        </header>
-        <ol class="shadow-steps">
-          <li>
-            <strong>BAA</strong>
-            <span>Business associate agreement when PHI is in scope. Minimum necessary thereafter.</span>
-          </li>
-          <li>
-            <strong>Shadow review</strong>
-            <span>Free 18–24 month claims + payments shadow on your extract. No production cutover required.</span>
-          </li>
-          <li>
-            <strong>Gate proof</strong>
-            <span>Show where the unit ledger and schedule/claim gates would have stopped denials — with citations and HITL.</span>
-          </li>
-        </ol>
-        <div class="hero-actions centered">
-          <a class="btn btn-primary" href="mailto:tech@platypustechdesign.com?subject=Clinic%20OS%20design%20partner">Request a design-partner conversation</a>
-          <a class="btn btn-secondary" href="#contact">Contact (draft form)</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- 10. Trust -->
-    <section class="section section-alt trust-section" id="trust" aria-labelledby="trust-title">
-      <div class="container">
-        <header class="section-head section-head-compact">
-          <p class="eyebrow">Trust</p>
-          <h2 id="trust-title">Controls before claims</h2>
-        </header>
-        <ul class="trust-grid">
-          <li>
-            <h3>BA when PHI</h3>
-            <p>Business associate agreement before any PHI. No shortcuts for demos that leave the sandbox.</p>
-          </li>
-          <li>
-            <h3>Minimum necessary</h3>
-            <p>Access and extracts scoped to what the shadow or design-partner work requires — nothing more.</p>
-          </li>
-          <li>
-            <h3>No real PHI in public demos</h3>
-            <p>Public materials and the unit ledger demo use synthetic data only.</p>
-          </li>
-          <li>
-            <h3>No “HIPAA certified” claim</h3>
-            <p>We do not claim HIPAA certification. We design for compliance workflows; certification language is not used here.</p>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- 11. Contact -->
-    <section class="section" id="contact" aria-labelledby="contact-title">
-      <div class="container contact-layout">
-        <div>
-          <header class="section-head section-head-left">
-            <p class="eyebrow">Contact</p>
-            <h2 id="contact-title">Design-partner conversation</h2>
-            <p class="section-lead">Draft form — wire to CRM later. Prefer email? Use the mailto CTA; subject is prefilled for Clinic OS.</p>
-          </header>
-          <p class="contact-direct">
-            <a href="mailto:tech@platypustechdesign.com?subject=Clinic%20OS%20design%20partner">tech@platypustechdesign.com</a>
-          </p>
-        </div>
-        <form class="contact-form" id="contact-form" novalidate>
-          <p class="form-draft-label">Draft contact form · no backend yet</p>
-          <label>
-            Name
-            <input type="text" name="name" autocomplete="name" required placeholder="Your name" />
-          </label>
-          <label>
-            Work email
-            <input type="email" name="email" autocomplete="email" required placeholder="you@organization.com" />
-          </label>
-          <label>
-            Organization
-            <input type="text" name="org" autocomplete="organization" placeholder="Clinic or agency" />
-          </label>
-          <label>
-            Interest
-            <select name="interest">
-              <option value="design-partner">Design-partner conversation</option>
-              <option value="demo">Unit ledger demo</option>
-              <option value="shadow">Shadow / claims review</option>
-            </select>
-          </label>
-          <label>
-            Message
-            <textarea name="message" rows="4" placeholder="Context, specialty, timeline…"></textarea>
-          </label>
-          <button class="btn btn-primary" type="submit">Send (draft — opens mailto)</button>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <span class="nav-brand">Clinic OS</span>
-        <p>Operating system for clinical operations.</p>
-      </div>
-      <div class="footer-legal">
-        <p>Clinic OS is a working product name of Platypus Tech &amp; Design, Inc. (GNScience DBA where applicable) — subject to trademark clearance.</p>
-        <p class="footer-holding">Holding / DBA noted for legal clarity only. Product lead is Clinic OS.</p>
-      </div>
-      <nav class="footer-nav" aria-label="Footer">
-        <a href="#product">Product</a>
-        <a href="#packs">Packs</a>
-        <a href="#demo">Demo</a>
-        <a href="#shadow">Shadow</a>
-        <a href="company.html">Company</a>
-        <a href="#contact">Contact</a>
-      </nav>
     </div>
-  </footer>
+  </section>
 
-  <script src="script.js"></script>
+  <!-- Problem -->
+  <section class="section" id="problem" data-page="home">
+    <div class="wrap">
+      <div class="section-head center">
+        <p class="eyebrow">Where revenue gets lost</p>
+        <h2>Earned revenue can disappear long before payment arrives.</h2>
+        <p>GNScience connects operational, coding, claims, and payment signals so teams can act earlier and spend human time where it has the most value.</p>
+      </div>
+      <div class="problem-grid">
+        <article class="problem"><h3>How much are preventable denials costing you?</h3><p>Catch authorization, coding, documentation, and claim-readiness issues before they become expensive rework.</p></article>
+        <article class="problem"><h3>Which aging claims are still worth pursuing?</h3><p>Surface recoverable work and prioritize the cases with the clearest evidence and the highest financial value.</p></article>
+        <article class="problem"><h3>Can your team see why a recommendation was made?</h3><p>GNScience attaches evidence and citations to its recommendations, so reviewers can inspect the reasoning path.</p></article>
+        <article class="problem"><h3>Are staff spending too much time stitching systems together?</h3><p>Bring signals from your existing systems into one operating view instead of forcing a rip-and-replace migration.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solutions -->
+  <section class="section alt" id="solutions" data-page="solutions">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">What GNScience does</p>
+        <h2>Find. Prevent. Recover. Learn.</h2>
+        <p>A focused set of capabilities across the revenue lifecycle, with AI doing more of the repetitive work and people keeping control over material decisions.</p>
+      </div>
+      <div class="cycle">
+      <div class="cards cycle-cards">
+        <article class="card"><div class="num">01 · FIND</div><h3>Locate revenue leakage</h3><p>Analyze claims, payments, authorizations, coding, and operational signals to pinpoint where earned revenue is being lost.</p></article>
+        <article class="card"><div class="num">02 · PREVENT</div><h3>Catch issues upstream</h3><p>Flag claim-readiness, authorization, and coding risks earlier, before they turn into denials or manual rework.</p></article>
+        <article class="card"><div class="num">03 · RECOVER</div><h3>Prioritize corrective work</h3><p>Surface recoverable claims, assemble the evidence, and focus staff attention on the work most likely to pay off.</p></article>
+        <article class="card"><div class="num">04 · LEARN</div><h3>Improve continuously</h3><p>Every outcome feeds back into the system, so recommendations get sharper and prevention gets stronger over time.</p></article>
+      </div>
+      <div class="loop-track" aria-hidden="true">
+        <span class="loop-path"><i class="loop-arrow"></i><i class="loop-start"></i></span>
+        <span class="loop-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 3v5h5"/></svg>Every outcome loops back to Find</span>
+      </div>
+      <p class="visually-hidden">Learn feeds every outcome back into Find, so the cycle repeats.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Platform -->
+  <section class="section" id="platform" data-page="platform">
+    <div class="wrap architecture">
+      <div>
+        <p class="eyebrow">The platform</p>
+        <h2>An intelligent layer across the systems you already use.</h2>
+        <p style="color:var(--muted)">GNScience brings together a healthcare knowledge layer, an operational intelligence layer, and AI workflow agents. Your EHR, practice-management system, clearinghouse, EVV, and payer connections all stay in place.</p>
+        <ul class="list-clean">
+          <li><strong>Healthcare knowledge layer.</strong> Payer requirements, specialty rules, coding relationships, and evidence paths.</li>
+          <li><strong>Operational intelligence layer.</strong> Authorization, visit, documentation, coding, claim, and payment state.</li>
+          <li><strong>AI workflow agents.</strong> Analyze, recommend, prepare work, and automate approved actions.</li>
+        </ul>
+      </div>
+      <div class="flow">
+        <svg viewBox="0 0 520 470" role="img" aria-labelledby="flow-title">
+          <title id="flow-title">Your EHR or practice-management system, clearinghouse, EVV, and payer data flow into the GNScience Intelligence Layer, which analyzes, recommends, and automates approved actions. Outcomes feed back into the layer.</title>
+          <defs>
+            <linearGradient id="coreGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e293b"/><stop offset="1" stop-color="#0f172a"/></linearGradient>
+            <filter id="soft" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0f172a" flood-opacity=".18"/></filter>
+          </defs>
+          <g id="in-wires">
+            <path class="wire" d="M65 62 C65 140, 220 130, 230 196"/>
+            <path class="wire" d="M193 62 C193 130, 250 140, 252 196"/>
+            <path class="wire" d="M321 62 C321 130, 270 140, 268 196"/>
+            <path class="wire" d="M449 62 C449 140, 300 130, 290 196"/>
+            <path class="wire" d="M235 284 C230 330, 90 330, 88 382"/>
+            <path class="wire" d="M260 284 L260 382"/>
+            <path class="wire" d="M285 284 C290 330, 430 330, 432 382"/>
+          </g>
+          <g aria-hidden="true">
+            <path class="pulse" d="M65 62 C65 140, 220 130, 230 196"/>
+            <path class="pulse" d="M193 62 C193 130, 250 140, 252 196" style="animation-delay:-.4s"/>
+            <path class="pulse" d="M321 62 C321 130, 270 140, 268 196" style="animation-delay:-.8s"/>
+            <path class="pulse" d="M449 62 C449 140, 300 130, 290 196" style="animation-delay:-1.2s"/>
+            <path class="pulse" d="M235 284 C230 330, 90 330, 88 382" style="animation-delay:-.2s"/>
+            <path class="pulse" d="M260 284 L260 382" style="animation-delay:-.6s"/>
+            <path class="pulse" d="M285 284 C290 330, 430 330, 432 382" style="animation-delay:-1s"/>
+            <path class="loop" d="M488 403 C512 403, 512 240, 480 240"/>
+            <polygon points="480,240 489,235 489,245" fill="#0d9488" opacity=".7"/>
+            <text x="512" y="322" font-family="Inter, system-ui, sans-serif" font-size="10.5" font-weight="600" fill="#0f766e" text-anchor="middle" transform="rotate(90 512 322)">Outcomes feed back</text>
+          </g>
+          <g font-family="Inter, system-ui, sans-serif" font-weight="600" font-size="14" fill="#334155" text-anchor="middle">
+            <rect x="6" y="18" width="118" height="44" rx="9" fill="#f6f9fb" stroke="#e2e8f0"/><text x="65" y="45">EHR / PM</text>
+            <rect x="134" y="18" width="118" height="44" rx="9" fill="#f6f9fb" stroke="#e2e8f0"/><text x="193" y="45">Clearinghouse</text>
+            <rect x="262" y="18" width="118" height="44" rx="9" fill="#f6f9fb" stroke="#e2e8f0"/><text x="321" y="45">EVV</text>
+            <rect x="390" y="18" width="118" height="44" rx="9" fill="#f6f9fb" stroke="#e2e8f0"/><text x="449" y="45">Payer data</text>
+          </g>
+          <g filter="url(#soft)">
+            <rect x="40" y="196" width="440" height="88" rx="14" fill="url(#coreGrad)"/>
+          </g>
+                    <text x="260" y="234" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">GNScience Intelligence Layer</text>
+          <text x="260" y="258" font-family="Inter, system-ui, sans-serif" font-size="11.5" fill="#94a3b8" text-anchor="middle">Authorization · Documentation · Coding · Claims · Payments</text>
+          <g font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="14" fill="#0f766e" text-anchor="middle">
+            <rect x="32" y="382" width="112" height="42" rx="21" fill="#ccfbf1"/><text x="88" y="408">Analyze</text>
+            <rect x="204" y="382" width="112" height="42" rx="21" fill="#ccfbf1"/><text x="260" y="408">Recommend</text>
+            <rect x="376" y="382" width="112" height="42" rx="21" fill="#ccfbf1"/><text x="432" y="408">Automate</text>
+          </g>
+          <text x="260" y="456" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#526a7f" text-anchor="middle">Your team approves every material action</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- Specialties -->
+  <section class="section alt" id="specialties" data-page="specialties">
+    <div class="wrap">
+      <div class="section-head center">
+        <p class="eyebrow">Initial specialties</p>
+        <h2>Focused where specialty workflows create expensive revenue gaps.</h2>
+        <p>GNScience starts with three markets where authorization, documentation, coding, and payer complexity create meaningful operational friction.</p>
+      </div>
+      <div class="cards three">
+        <article class="card specialty-card">
+          <div><div class="num">PEDIATRICS</div><h3>Protect reimbursement without adding administrative work.</h3><p>Connect coding, documentation, eligibility, claims, and payer outcomes across pediatric workflows.</p></div>
+          <div class="specialty-meta">Primary focus: coding integrity, denial prevention, reimbursement analytics.</div>
+        </article>
+        <article class="card specialty-card">
+          <div><div class="num">HOME HEALTH</div><h3>Connect authorization, visits, documentation, and claims.</h3><p>Identify gaps across distributed home-health workflows before they become lost revenue or rework.</p></div>
+          <div class="specialty-meta">Primary focus: authorization, visit integrity, claim readiness, recovery.</div>
+        </article>
+        <article class="card specialty-card">
+          <div><div class="num">ABA / AUTISM SERVICES</div><h3>Track authorized units and claim readiness before leakage occurs.</h3><p>Bring unit, session, authorization, and claim signals into one operational view.</p></div>
+          <div class="specialty-meta">Primary focus: authorization units, session integrity, claim readiness.</div>
+        </article>
+      </div>
+</div>
+  </section>
+
+  <!-- Design partners -->
+  <section class="section" id="partners" data-page="partners">
+    <div class="wrap partner-grid">
+      <div class="partner-head">
+        <p class="eyebrow">Design Partner Program</p>
+        <h2>See what it would have caught, on your own claims</h2>
+      </div>
+      <div>
+        <p class="partner-intro">Our design-partner review costs nothing and changes nothing in your systems. You get a clear picture of where your revenue went.</p>
+        <ol class="steps">
+          <li><h3>Business associate agreement</h3><p>We sign a BAA before we touch any patient data, and we ask only for what the review needs.</p></li>
+          <li><h3>Share a claims and payments extract</h3><p>We look back across 18 to 24 months of your claims and payments history.</p></li>
+          <li><h3>Get your denial review</h3><p>We show which denials our checks would have stopped, what each one cost, and the evidence behind each finding.</p></li>
+          <li><h3>Decide what comes next</h3><p>Keep the findings either way. If it is worth pursuing, we build the rollout with you.</p></li>
+        </ol>
+      </div>
+      <div class="gets">
+        <h3>What design partners get</h3>
+        <ul>
+          <li>A free historical denial and recovery review</li>
+          <li>Early access to GNScience, shaped around your workflows</li>
+          <li>A direct line to the founders and engineering team</li>
+          <li>Preferred terms when you move to production</li>
+        </ul>
+        <h3>What we ask</h3>
+        <ul>
+          <li>A data extract under a signed BAA</li>
+          <li>A few working sessions with your billing or operations lead</li>
+          <li>Honest feedback on what helps and what does not</li>
+        </ul>
+        <a class="btn" href="#contact" data-interest="assessment">Request a denial review</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust -->
+  <section class="section alt" id="trust" data-page="trust">
+    <div class="wrap">
+      <div class="section-head center">
+        <p class="eyebrow">Security and trust</p>
+        <h2>Healthcare controls before production automation.</h2>
+        <p>Public demos use synthetic data. PHI work begins only under appropriate agreements and scoped access. GNScience does not claim "HIPAA certification."</p>
+      </div>
+      <div class="trust-grid">
+        <div class="trust"><h3>BAA when PHI is in scope</h3><p>Appropriate agreements before any PHI enters a design-partner workflow.</p></div>
+        <div class="trust"><h3>Minimum necessary access</h3><p>Data and permissions scoped to the agreed analysis or workflow, nothing more.</p></div>
+        <div class="trust"><h3>Human oversight</h3><p>Material actions can be reviewed and controlled by the customer team.</p></div>
+        <div class="trust"><h3>Auditable evidence paths</h3><p>Recommendations are designed to be inspectable and auditable for compliance.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Company -->
+  <section class="section" id="company" data-page="company">
+    <div class="wrap company-grid">
+      <div>
+        <p class="eyebrow">Company</p>
+        <h2>A team building revenue tools that explain themselves</h2>
+        <p class="company-intro">GNScience exists so that the providers Medicaid depends on get paid fully for the care they deliver. We build alongside our design partners, and we think AI in healthcare operations should show its work and leave decisions to people.</p>
+        <div class="founder-list">
+          <div class="founder-row">
+            <div class="founder-avatar" aria-hidden="true">JL</div>
+            <div>
+              <h4>John Lee, Ph.D.</h4>
+              <p class="founder-role">Co-Founder &amp; Chief Executive Officer, GNScience</p>
+              <p>John Lee is Co-Founder and CEO of GNScience, where he leads company strategy, commercialization, partnerships, operations, and go-to-market execution. He brings more than 20 years of leadership experience spanning enterprise technology, cloud computing, SaaS, startups, customer solutions, and large-scale program execution.</p>
+              <p>Previously, John served as COO of Orion Governance, a data and metadata governance software company, and held senior leadership roles at Amazon Web Services, where he worked with major enterprise customers, including healthcare organizations, on cloud adoption, technical strategy, modernization, and complex customer initiatives. His broader career includes experience with Ernst &amp; Young and other large enterprises, giving him a combination of startup operating experience, enterprise technology expertise, and Fortune 500 execution discipline.</p>
+              <p>At GNScience, John is focused on translating advanced AI capabilities into scalable healthcare products, establishing design-partner and enterprise relationships, and building the commercial and operating foundation required to expand across multiple healthcare verticals. He holds degrees from the University of California, Berkeley (B.S. Engineering) and the University of Southern California (M.S. Management), as well as a Ph.D.</p>
+            </div>
+          </div>
+          <div class="founder-row">
+            <div class="founder-avatar" aria-hidden="true">JC</div>
+            <div>
+              <h4>James Choi, Ph.D.</h4>
+              <p class="founder-role">Co-Founder &amp; Chief Technology Officer, GNScience</p>
+              <p>James Choi is Co-Founder and CTO of GNScience and the principal architect of the company&rsquo;s AI-native healthcare platform. A neuroscientist and applied AI technologist, James brings more than a decade of experience across artificial intelligence, data science, healthcare, biomedical signal processing, predictive modeling, and production software development.</p>
+              <p>Importantly for GNScience, he has direct experience working on Revenue Cycle Management workflows in both home health and pediatrics, providing firsthand understanding of coding, reimbursement, claims, clinical documentation, and administrative workflow challenges in the company&rsquo;s initial target markets. He also brings deep expertise in LLM and RAG systems, agentic AI architectures, clinical data modeling, healthcare integrations, model evaluation, and privacy-conscious AI applications.</p>
+              <p>At GNScience, James leads technology and product development, including the clinical ontology, agentic workflow architecture, model and data infrastructure, EHR and payer integrations, and the technical systems underlying the company&rsquo;s revenue-cycle automation platform. James earned his Ph.D. in Neuroscience from Brandeis University after studying Biochemistry and Cognitive Science at Rice University, and subsequently conducted postdoctoral research at Boston Children&rsquo;s Hospital and Harvard Medical School.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Careers -->
+  <section class="section alt careers-section" id="careers" data-page="careers">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Careers</p>
+        <h2>We are hiring</h2>
+        <p>Work on AI that has to be right, and has to show why. You will ship to real clinics early and often.</p>
+      </div>
+      <div class="role-grid">
+        <article class="role">
+          <span class="role-tag">Engineering</span>
+          <h3>Machine-learning engineers</h3>
+          <p>Build and evaluate the models and workflow agents behind cited, reviewable recommendations.</p>
+          <a class="more" href="#contact" data-interest="careers">Apply for this role</a>
+        </article>
+        <article class="role">
+          <span class="role-tag">Engineering</span>
+          <h3>Platform and backend engineers</h3>
+          <p>Build the integrations, data pipelines, and infrastructure that connect to EHR, clearinghouse, and payer systems.</p>
+          <a class="more" href="#contact" data-interest="careers">Apply for this role</a>
+        </article>
+        <article class="role">
+          <span class="role-tag">Operations and advisory</span>
+          <h3>Pediatric Group Operator or RCM Director/Advisor</h3>
+          <p>Bring hands-on experience running pediatric practice operations or revenue cycle management, and help shape what we build.</p>
+          <a class="more" href="#contact" data-interest="careers">Apply for this role</a>
+        </article>
+      </div>
+      <div class="investor-wrap">
+        <div class="info-block" id="investors">
+          <h3>For investors</h3>
+          <p>We are happy to share our thesis, progress, and plans with investors focused on healthcare and applied AI.</p>
+          <a class="more" href="#contact" data-interest="investor">Contact the founders</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section alt" id="contact" data-page="contact">
+    <div class="wrap contact-layout">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h2 style="font-family:var(--serif);font-size:clamp(1.5rem,2.6vw,2.05rem);margin:0 0 .6rem;line-height:1.2">Start a conversation.</h2>
+        <p style="color:var(--slate);margin:0;font-size:1.05rem">Design partner, customer, candidate, or investor. Tell us what you are trying to solve and we will follow up. Prefer email? Use the address below.</p>
+        <p class="contact-direct"><a href="mailto:info@gnscience.com?subject=GNScience%20inquiry">info@gnscience.com</a></p>
+      </div>
+      <form class="contact-form" id="contact-form" novalidate>
+        <label>Name<input type="text" name="name" autocomplete="name" required placeholder="Your name" /></label>
+        <label>Work email<input type="email" name="email" autocomplete="email" required placeholder="you@organization.com" /></label>
+        <label>Organization<input type="text" name="org" autocomplete="organization" placeholder="Clinic, agency, or fund" /></label>
+        <label>I am interested in
+          <select name="interest">
+            <option value="demo">A product demo</option>
+            <option value="design-partner">A design partnership</option>
+            <option value="assessment">A free denial review</option>
+            <option value="careers">Careers</option>
+            <option value="investor">Investor conversation</option>
+          </select>
+        </label>
+        <label>Message<textarea name="message" rows="4" placeholder="What are you trying to solve?"></textarea></label>
+        <button class="btn primary" type="submit">Send (opens email)</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="#home"><span class="brand-mark" aria-hidden="true"></span>GNScience</a>
+        <p>Revenue intelligence for specialty healthcare. Find leakage, prevent avoidable denials, and recover the revenue you have already earned.</p>
+        <div class="footer-investor"><a href="#contact" data-interest="investor">Investor inquiries</a></div>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="#solutions">Solutions</a>
+        <a href="#platform">Platform</a>
+        <a href="#specialties">Specialties</a>
+        <a href="#partners">Design Partners</a>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a href="#company">Company</a>
+        <a href="#careers">Careers</a>
+        <a href="#trust">Security and Trust</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+    <div class="legal">
+      <span>&copy; 2026 GNScience. All rights reserved.</span>
+      <span>Clinic OS may be used as a working platform name. Entity and trademark language to be finalized before production launch.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var btn=document.querySelector(".menu-btn"),menu=document.getElementById("nav-links");
+  if(btn&&menu){
+    btn.addEventListener("click",function(){
+      var open=menu.classList.toggle("open");
+      btn.setAttribute("aria-expanded",open?"true":"false");
+    });
+    menu.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){menu.classList.remove("open");btn.setAttribute("aria-expanded","false");});});
+  }
+  var sel=document.querySelector('#contact-form select[name="interest"]');
+  document.querySelectorAll("[data-interest]").forEach(function(el){el.addEventListener("click",function(){if(sel){sel.value=el.getAttribute("data-interest");}});});
+  var form=document.getElementById("contact-form");
+  if(form){
+    form.addEventListener("submit",function(e){
+      e.preventDefault();
+      var d=new FormData(form);
+      var name=(d.get("name")||"").toString().trim();
+      var email=(d.get("email")||"").toString().trim();
+      var org=(d.get("org")||"").toString().trim();
+      var interest=(d.get("interest")||"").toString();
+      var message=(d.get("message")||"").toString().trim();
+      if(!name||!email){window.alert("Please add your name and work email.");return;}
+      var subjects={demo:"GNScience demo request","design-partner":"GNScience design partnership",assessment:"GNScience free denial review",careers:"GNScience careers",investor:"GNScience investor conversation"};
+      var subject=subjects[interest]||"GNScience inquiry";
+      var body=["Name: "+name,"Email: "+email,"Organization: "+(org||"(not provided)"),"Interest: "+interest,"",message||"(no message)"].join("\n");
+      window.location.href="mailto:info@gnscience.com?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(body);
+    });
+  }
+})();
+</script>
+<script>
+(function(){
+  "use strict";
+  var order=["home","solutions","platform","specialties","partners","trust","company","careers","contact"];
+  var labels={home:"Home",solutions:"Solutions",platform:"Platform",specialties:"Specialties",partners:"Design Partners",trust:"Security &amp; Trust",company:"Company",careers:"Careers",contact:"Contact"};
+  var titles={home:"",solutions:"Solutions",platform:"Platform",specialties:"Specialties",partners:"Design Partners",trust:"Security & Trust",company:"Company",careers:"Careers",contact:"Contact"};
+  var baseTitle=document.title;
+  var root=document.documentElement;
+  var main=document.getElementById("main");
+  if(!main||!main.closest)return;
+  root.classList.add("js-pages");
+
+  // Previous / Next links at the end of each page
+  order.forEach(function(pg,i){
+    var secs=main.querySelectorAll('[data-page="'+pg+'"]');
+    if(!secs.length)return;
+    var last=secs[secs.length-1];
+    var wrap=document.createElement("div");
+    wrap.className="pager-wrap"+(last.classList.contains("alt")?" on-alt":"");
+    wrap.setAttribute("data-page",pg);
+    var html='<nav class="wrap pager" aria-label="Page navigation">';
+    if(i>0)html+='<a class="prev" href="#'+order[i-1]+'"><small>&larr; Previous</small>'+labels[order[i-1]]+'</a>';
+    if(i<order.length-1)html+='<a class="next" href="#'+order[i+1]+'"><small>Next &rarr;</small>'+labels[order[i+1]]+'</a>';
+    wrap.innerHTML=html+'</nav>';
+    last.parentNode.insertBefore(wrap,last.nextSibling);
+  });
+
+  var current=null;
+  function resolve(id){
+    if(!id||id==="top"||id==="home")return {page:"home",target:null};
+    var el=document.getElementById(id);
+    if(!el)return {page:"home",target:null};
+    var host=el.closest("[data-page]");
+    if(!host)return {page:current||"home",target:el}; // e.g. skip link to #main
+    var pg=host.getAttribute("data-page");
+    var first=main.querySelector('[data-page="'+pg+'"]');
+    return {page:pg,target:(el===first)?null:el};
+  }
+  function show(fromUser){
+    var r=resolve(location.hash.slice(1));
+    main.querySelectorAll("[data-page]").forEach(function(el){
+      el.classList.toggle("page-off",el.getAttribute("data-page")!==r.page);
+    });
+    document.querySelectorAll(".nav-links a").forEach(function(a){
+      var t=resolve(a.getAttribute("href").slice(1));
+      var on=(t.page===r.page)&&(!t.target||t.target===r.target);
+      if(on)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");
+    });
+    document.title=titles[r.page]?titles[r.page]+" | GNScience":baseTitle;
+    var prev=root.style.scrollBehavior;
+    root.style.scrollBehavior="auto";
+    if(r.target&&r.target!==main)r.target.scrollIntoView();else window.scrollTo(0,0);
+    root.style.scrollBehavior=prev;
+    if(fromUser&&current!==r.page){
+      var h=main.querySelector('[data-page="'+r.page+'"] h1, [data-page="'+r.page+'"] h2');
+      if(h){h.setAttribute("tabindex","-1");h.style.outline="none";h.focus({preventScroll:true});}
+    }
+    current=r.page;
+  }
+  window.addEventListener("hashchange",function(){show(true);});
+  // A link to the page you are already on still brings you back to its top
+  document.addEventListener("click",function(e){
+    var a=e.target.closest&&e.target.closest('a[href^="#"]');
+    if(a&&a.getAttribute("href")===location.hash)setTimeout(function(){show(true);},0);
+  });
+  show(false);
+})();
+
+</script>
 </body>
 </html>
