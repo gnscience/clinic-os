@@ -1,10 +1,10 @@
-# Clinic OS — marketing site
+# GNScience — company site
 
-Public host (interim): **https://gnscience.github.io/clinic-os/**
+Public site: **https://gnscience.github.io/clinic-os/**
 
-V-CLINIC only. Synthetic demos · no PHI. Scout nits applied 2026-09-22.
+This repository hosts the public GNScience company marketing site on GitHub Pages (project site, `main` branch, `/`). The page is a single `index.html` with inline CSS and JavaScript. Google Fonts is the only external dependency.
 
-Later: move to `gns-clinic-os.github.io` when that org exists.
+Clinic OS is a working platform name, not the public product brand. The earlier multi-file Clinic OS landing (`company.html`, `styles.css`, `script.js`) has been removed.
 
 ## Preview locally
 
